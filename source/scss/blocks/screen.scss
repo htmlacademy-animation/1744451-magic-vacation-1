@@ -6,8 +6,10 @@
   z-index: 1;
   overflow: hidden;
 
-  &--hidden {
-    display: none;
+  &:not(.active) {
+    height: 0;
+    min-height: initial;
+    visibility: hidden;
   }
 
   @media (max-width: $tablet) and (orientation: portrait) {
