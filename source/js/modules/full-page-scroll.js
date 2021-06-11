@@ -40,12 +40,28 @@ export default class FullPageScroll {
   }
 
   changeVisibilityDisplay() {
+    let timeout = 0;
+
     this.screenElements.forEach((screen) => {
-      screen.classList.add(`screen--hidden`);
-      screen.classList.remove(`active`);
+      if (screen.classList.contains(`screen--story`) && screen.classList.contains(`active`) && this.screenElements[this.activeScreen].classList.contains(`screen--prizes`)) {
+        timeout = 500;
+      }
+      screen.classList.remove(`screen--next`);
+
+      setTimeout(() => {
+        screen.classList.add(`screen--hidden`);
+        screen.classList.remove(`active`);
+      }, timeout);
+      // screen.classList.add(`screen--hidden`);
+      // screen.classList.remove(`active`);
+
     });
-    this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
-    this.screenElements[this.activeScreen].classList.add(`active`);
+    setTimeout(() => {
+      this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
+      this.screenElements[this.activeScreen].classList.add(`active`);
+    }, timeout);
+    this.screenElements[this.activeScreen].classList.add(`screen--next`);
+
   }
 
   changeActiveMenuItem() {

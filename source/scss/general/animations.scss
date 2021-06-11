@@ -234,3 +234,28 @@ body.loaded {
     }
   }
 }
+
+//.screen--story.screen--hidden {
+//  height: auto;
+//  min-height: initial;
+//  visibility: visible;
+//  z-index: 2;
+//}
+
+//.screen--story.active ~ .overlay {
+//  transform: scaleY(0);
+//}
+
+.screen--prizes.screen--next ~ .overlay {
+  transform: scaleY(1);
+}
+
+.screen--prizes.active {
+  z-index: 2;
+
+  transition: opacity 0.5s ease;
+
+  & ~ .overlay {
+    transition-duration: 0s;
+  }
+}
