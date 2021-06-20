@@ -4370,7 +4370,7 @@ body.loaded .social-block__toggler::before {
 
 @keyframes show-bullet {
   to {
-    transform: scale(1, 1);
+    transform: scale(1.5, 1.5);
   }
 }
 @keyframes show-digits {
