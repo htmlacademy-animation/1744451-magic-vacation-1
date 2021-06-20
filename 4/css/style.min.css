@@ -3031,7 +3031,7 @@ img {
 .rules__item {
   position: relative;
   margin: 0 0 6.2rem;
-  padding-top: 0.6rem;
+  padding-top: 1rem;
   padding-left: 6.5rem;
   break-inside: avoid;
 }
@@ -3063,7 +3063,7 @@ img {
   content: counter(li);
   counter-increment: li;
   position: absolute;
-  top: 0;
+  top: 0.4rem;
   left: 0;
   width: 4.5rem;
   height: 4.5rem;
@@ -3080,7 +3080,7 @@ img {
   background-color: #a67ee5;
   border-radius: 50%;
   position: absolute;
-  top: 0;
+  top: 0.4rem;
   left: 0;
   width: 4.5rem;
   height: 4.5rem;
@@ -4370,7 +4370,7 @@ body.loaded .social-block__toggler::before {
 
 @keyframes show-bullet {
   to {
-    transform: scale(1.5, 1.5);
+    transform: scale(1, 1);
   }
 }
 @keyframes show-digits {
