@@ -10675,13 +10675,6 @@ __webpack_require__.r(__webpack_exports__);
         });
         targetEl[0].classList.add(`screen--show`);
         targetEl[0].classList.remove(`screen--hidden`);
-        const event = new CustomEvent(`showResult`, {
-          detail: {
-            'target': target
-          }
-        });
-
-        document.body.dispatchEvent(event);
       });
     }
 
@@ -10884,49 +10877,6 @@ const replayAnimations = () => {
 };
 
 document.body.addEventListener(`screenChanged`, replayAnimations);
-
-const showBtnAnimation = [
-  {opacity: 1}
-];
-
-const showBtnTimings = {
-  duration: 500,
-  delay: 500,
-  fill: `forwards`
-};
-
-const showBtnTextAnimation = [
-  {color: `#5f458c`}
-];
-
-const showBtnTextTimings = {
-  duration: 500,
-  delay: 700,
-  fill: `forwards`
-};
-
-const showInputAnimation = [
-  {width: `calc(100% - 31rem)`, padding: `0 5.6rem`}
-];
-
-const showInputTimings = {
-  duration: 600,
-  delay: 1000,
-  fill: `forwards`
-};
-
-
-document.querySelector(`#message-form .form__button`).animate(showBtnAnimation, showBtnTimings);
-document.querySelector(`#message-form .form__button`).animate(showBtnTextAnimation, showBtnTextTimings);
-document.querySelector(`#message-form .form__field`).animate(showInputAnimation, showInputTimings);
-
-document.body.addEventListener(`showResult`, (event) => {
-  const target = event.detail.target;
-  document.querySelector(`#${target} .form__button`).animate(showBtnAnimation, showBtnTimings);
-  document.querySelector(`#${target} .form__button`).animate(showBtnTextAnimation, showBtnTextTimings);
-  document.querySelector(`#${target} .form__field`).animate(showInputAnimation, showInputTimings);
-});
-
 
 
 /***/ }),
