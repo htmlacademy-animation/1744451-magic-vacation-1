@@ -25,16 +25,17 @@
 
 .intro__title {
   margin: 0;
-  max-width: 99rem;
+  //max-width: 99rem;
   text-transform: uppercase;
   font-family: $font-alt;
   font-weight: 400;
   font-size: 12rem;
   line-height: 0.906;
   letter-spacing: -0.04em;
+  overflow: hidden;
 
   @media (min-width: $stop-scaling) {
-    max-width: 990px;
+    max-width: 1000px;
     font-size: 120px;
   }
 
@@ -160,5 +161,20 @@
   @media (min-width: $stop-scaling) {
     margin: 0 0 0 -5px;
     font-size: 48px;
+  }
+}
+
+.animated-text__word {
+  display: inline-block;
+  overflow: hidden;
+
+  & > span {
+    transform: translate3d(0, 100%, 0);
+    display: inline-block;
+    padding-top: 2rem;
+
+    .active .active > & {
+      transform: translate3d(0, 0, 0);
+    }
   }
 }

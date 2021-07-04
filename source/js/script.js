@@ -7,6 +7,7 @@ import chat from './modules/chat.js';
 import result from './modules/result.js';
 import form from './modules/form.js';
 import social from './modules/social.js';
+import {animateLetters} from './modules/animations.js';
 import FullPageScroll from './modules/full-page-scroll';
 
 document.addEventListener(`DOMContentLoaded`, () => {
@@ -25,3 +26,20 @@ social();
 
 const fullPageScroll = new FullPageScroll();
 fullPageScroll.init();
+
+const animations = {};
+animations[`intro__title`] = animateLetters(document.querySelector(`.intro__title`), {duration: 1000, delay: 500});
+animations[`intro__date`] = animateLetters(document.querySelector(`.intro__date`), {duration: 500, delay: 1000, wordDelayDiff: 0});
+animations[`slider__item-title`] = animateLetters(document.querySelector(`.slider__item-title`), {duration: 500, delay: 500});
+animations[`rules__title`] = animateLetters(document.querySelector(`.rules__title`), {duration: 500, delay: 500});
+animations[`game__title`] = animateLetters(document.querySelector(`.game__title`), {duration: 500, delay: 500});
+
+const replayAnimations = () => {
+  for (const key of Object.keys(animations)) {
+    for (const animation of animations[key]) {
+      animation.play();
+    }
+  }
+};
+
+document.body.addEventListener(`screenChanged`, replayAnimations);
