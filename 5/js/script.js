@@ -10271,30 +10271,38 @@ const animateLetters = (textNode, settings) => {
     return [];
   }
 
-  const duration = settings.duration ? settings.duration : 500;
+  const duration = settings.duration ? settings.duration : 800;
   const delay = settings.delay ? settings.delay : 0;
-  const wordDelayDiff = settings.hasOwnProperty(`wordDelayDiff`) ? settings.wordDelayDiff : 300;
+  const waveLength = settings.waveLength ? settings.waveLength : 6;
 
   prepareLetters(textNode);
 
   const words = textNode.querySelectorAll(`.animated-text__word`);
-  let wordDelay = 0;
+  let wordIndex = 0;
+  let letterIndex = 0;
   for (const word of words) {
     const letters = word.querySelectorAll(`span`);
     for (const letter of letters) {
+      const letterDuration = (duration * 1.5) / (wordIndex + 1);
+      const letterDelay = (Math.abs((letterIndex % waveLength) - waveLength / 2)
+        * (Math.trunc(Math.random() * 75 / (wordIndex + 1)) + 75))
+        + (duration / (wordIndex + 1) * wordIndex * 1.5)
+        + delay;
       const animation = letter.animate([
         // keyframes
+        {transform: `translate3d(0, 100%, 0)`},
         {transform: `translate3d(0, 0, 0)`}
       ], {
         // timing options
-        duration,
-        fill: `forwards`,
-        delay: Math.random() * 300 + wordDelay + delay
+        duration: letterDuration,
+        fill: `both`,
+        delay: letterDelay,
+        easing: `cubic-bezier(0.18, 0.89, 0.32, 1)`
       });
-      animationsArray.push(animation)
+      animationsArray.push(animation);
+      letterIndex++;
     }
-
-    wordDelay += wordDelayDiff;
+    wordIndex++;
   }
   return animationsArray;
 };
@@ -10862,11 +10870,12 @@ const fullPageScroll = new _modules_full_page_scroll__WEBPACK_IMPORTED_MODULE_9_
 fullPageScroll.init();
 
 const animations = {};
-animations[`intro__title`] = Object(_modules_animations_js__WEBPACK_IMPORTED_MODULE_8__["animateLetters"])(document.querySelector(`.intro__title`), {duration: 1000, delay: 500});
-animations[`intro__date`] = Object(_modules_animations_js__WEBPACK_IMPORTED_MODULE_8__["animateLetters"])(document.querySelector(`.intro__date`), {duration: 500, delay: 1000, wordDelayDiff: 0});
-animations[`slider__item-title`] = Object(_modules_animations_js__WEBPACK_IMPORTED_MODULE_8__["animateLetters"])(document.querySelector(`.slider__item-title`), {duration: 500, delay: 500});
-animations[`rules__title`] = Object(_modules_animations_js__WEBPACK_IMPORTED_MODULE_8__["animateLetters"])(document.querySelector(`.rules__title`), {duration: 500, delay: 500});
-animations[`game__title`] = Object(_modules_animations_js__WEBPACK_IMPORTED_MODULE_8__["animateLetters"])(document.querySelector(`.game__title`), {duration: 500, delay: 500});
+animations[`intro__title`] = Object(_modules_animations_js__WEBPACK_IMPORTED_MODULE_8__["animateLetters"])(document.querySelector(`.intro__title`), {duration: 600, delay: 200});
+animations[`intro__date`] = Object(_modules_animations_js__WEBPACK_IMPORTED_MODULE_8__["animateLetters"])(document.querySelector(`.intro__date`), {duration: 400, delay: 700});
+animations[`slider__item-title`] = Object(_modules_animations_js__WEBPACK_IMPORTED_MODULE_8__["animateLetters"])(document.querySelector(`.slider__item-title`), {duration: 250, delay: 0, waveLength: 0});
+animations[`rules__title`] = Object(_modules_animations_js__WEBPACK_IMPORTED_MODULE_8__["animateLetters"])(document.querySelector(`.rules__title`), {duration: 250, delay: 0});
+animations[`game__title`] = Object(_modules_animations_js__WEBPACK_IMPORTED_MODULE_8__["animateLetters"])(document.querySelector(`.game__title`), {duration: 250, delay: 0});
+animations[`prizes__title`] = Object(_modules_animations_js__WEBPACK_IMPORTED_MODULE_8__["animateLetters"])(document.querySelector(`.prizes__title`), {duration: 250, delay: 250});
 
 const replayAnimations = () => {
   for (const key of Object.keys(animations)) {

@@ -1554,81 +1554,44 @@ img {
   }
 }
 
-.screen--result .form__field {
-  width: 0;
-  padding: 0;
-  animation: showInput 0.6s 1s forwards;
-  animation-play-state: paused;
-}
-.screen--result .form__field::placeholder {
-  color: #5f458c;
-  opacity: 0.4;
-}
-@keyframes showInput {
-  to {
-    width: calc(100% - 31rem);
-    padding: 0 5.6rem;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-}
-@keyframes showInput2 {
-  to {
-    width: calc(100% - 310px);
-    padding: 0 5.6rem;
-  }
-}
-@keyframes showInput3 {
-  to {
-    width: calc(100% - 6rem);
-    padding: 0 5.6rem;
-  }
-}
-@keyframes showInput4 {
-  to {
-    width: calc(100% - 9rem);
-    padding: 0 5.6rem;
-  }
-}
-@media (min-width: 2000px) {
-  .screen--result .form__field {
-    width: calc(100% - 310px);
-    animation-name: showInput2;
-  }
-}
-@media (orientation: portrait) {
-  .screen--result .form__field {
-    width: calc(100% - 5rem);
-    animation-name: showInput3;
-  }
-}
-@media (max-width: 1024px) and (orientation: landscape) {
-  .screen--result .form__field {
-    width: calc(100% - 9rem);
-    animation-name: showInput4;
-  }
-}
-@media (max-width: 768px) and (orientation: landscape) {
-  .screen--result .form__field {
-    width: calc(100% - 5rem);
-    animation-name: showInput3;
-  }
-}
-.screen--result .form__button {
-  padding: 1.5rem 5rem;
-  flex-grow: 0;
-  opacity: 0;
-  color: transparent;
-  animation: showBtn 0.5s 0.5s forwards, showBtnText 0.5s 0.7s forwards;
-  animation-play-state: paused;
-}
-@keyframes showBtn {
   to {
     opacity: 1;
   }
 }
+@keyframes showInput {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
 @keyframes showBtnText {
+  from {
+    color: transparent;
+  }
   to {
     color: #5f458c;
   }
+}
+.screen--result .form__field {
+  animation: showInput 0.6s 1s both;
+  animation-play-state: paused;
+  transform-origin: right;
+}
+.screen--result .form__field::placeholder {
+  color: transparent;
+  transition: color 0.5s ease 1.6s;
+}
+.screen--result .form__button {
+  padding: 1.5rem 5rem;
+  flex-grow: 0;
+  animation: fadeIn 0.5s 0.5s both, showBtnText 0.5s 0.7s both;
+  animation-play-state: paused;
 }
 @media (orientation: portrait) {
   .screen--result .form__button {
@@ -1644,6 +1607,11 @@ img {
 .screen--show .form__button,
 .screen--show .form--result .form__field {
   animation-play-state: running;
+}
+.screen--show .form__button::placeholder,
+.screen--show .form--result .form__field::placeholder {
+  color: #5f458c;
+  opacity: 0.4;
 }
 
 .game {
@@ -1973,12 +1941,9 @@ img {
   overflow: hidden;
 }
 .animated-text__word > span {
-  transform: translate3d(0, 100%, 0);
   display: inline-block;
   padding-top: 2rem;
-}
-.active .active > .animated-text__word > span {
-  transform: translate3d(0, 0, 0);
+  will-change: transform;
 }
 
 .page-header {
@@ -3150,7 +3115,6 @@ img {
 }
 .rules__item::before {
   content: "";
-  transform: scale(0, 0);
   background-color: #a67ee5;
   border-radius: 50%;
   position: absolute;
@@ -3179,7 +3143,6 @@ img {
 }
 .rules__item p {
   margin: 0;
-  opacity: 0;
 }
 @media (max-width: 1024px) and (orientation: portrait) {
   .rules__item p {
@@ -3191,11 +3154,8 @@ img {
   position: absolute;
   bottom: 6rem;
   right: 5.6rem;
-  color: transparent;
 }
 .rules__link::before {
-  opacity: 0;
-  width: 6rem;
   top: 0;
   right: 0;
   transform: none;
@@ -4316,7 +4276,7 @@ img {
   flex-grow: 0;
 }
 
-.screen:not(.active) .form__field {
+.screen:not(.active) .chat__footer .form__field {
   width: 0;
   padding: 0;
 }
@@ -4389,15 +4349,14 @@ body.loaded .social-block__toggler::before {
 }
 
 .screen--rules.active .rules .rules__list .rules__item::before {
-  animation: show-bullet 0.3s forwards;
+  animation: showBullet 0.3s both;
   animation-timing-function: cubic-bezier(0.17, 0.67, 0.75, 1.47);
 }
 .screen--rules.active .rules .rules__list .rules__item::after {
-  animation: show-digits 0.3s forwards;
+  animation: fadeIn 0.3s both;
 }
 .screen--rules.active .rules .rules__list .rules__item p {
-  transform: translateX(30px);
-  animation: show-text 0.5s ease-out forwards;
+  animation: showText 0.5s ease-out both;
 }
 .screen--rules.active .rules .rules__list .rules__item:nth-of-type(1)::before {
   animation-delay: 0s;
@@ -4436,34 +4395,34 @@ body.loaded .social-block__toggler::before {
   animation-delay: 1.1s;
 }
 .screen--rules.active .rules .rules__link {
-  animation: show-link-text 0.3s forwards 1.7s;
+  animation: showLinkText 0.3s both 1.7s;
 }
 .screen--rules.active .rules .rules__link::before {
-  animation: show-link 0.3s forwards 1.4s;
+  animation: showLink 0.3s both 1.4s;
 }
 
-@keyframes show-bullet {
+@keyframes showBullet {
+  from {
+    transform: scale(0, 0);
+  }
   to {
     transform: scale(1, 1);
   }
 }
-@keyframes show-digits {
+@keyframes showText {
   from {
+    transform: translateX(3rem);
     opacity: 0;
   }
-  to {
-    opacity: 1;
-  }
-}
-@keyframes show-text {
   to {
     transform: translateX(0);
     opacity: 1;
   }
 }
-@keyframes show-link {
-  0% {
-    opacity: 1;
+@keyframes showLink {
+  from {
+    opacity: 0;
+    width: 6rem;
   }
   to {
     opacity: 1;
@@ -4471,15 +4430,18 @@ body.loaded .social-block__toggler::before {
     display: block;
   }
 }
-@keyframes show-link-text {
+@keyframes showLinkText {
+  from {
+    color: transparent;
+  }
   to {
     color: #5f458c;
   }
 }
-@keyframes right-leaf {
-  0% {
+@keyframes showRightBlueLeaf {
+  from {
     opacity: 0;
-    transform: translateY(-300px) rotateZ(-20deg);
+    transform: translateY(-30rem) rotateZ(-20deg);
   }
   25% {
     transform: rotateZ(10deg);
@@ -4491,15 +4453,15 @@ body.loaded .social-block__toggler::before {
     transform: rotateZ(5deg);
     opacity: 1;
   }
-  100% {
+  to {
     opacity: 1;
     transform: translateY(0) rotateZ(0);
   }
 }
-@keyframes left-leaf {
-  0% {
+@keyframes showLeftBlueLeaf {
+  from {
     opacity: 0;
-    transform: translateY(-300px) rotate(20deg);
+    transform: translateY(-30rem) rotate(20deg);
   }
   25% {
     transform: rotate(-10deg);
@@ -4511,48 +4473,48 @@ body.loaded .social-block__toggler::before {
     transform: rotate(-5deg);
     opacity: 1;
   }
-  100% {
+  to {
     opacity: 1;
     transform: translateY(0) rotate(0);
   }
 }
-@keyframes green-leaf {
-  0% {
+@keyframes showGreenLeaf {
+  from {
     opacity: 0;
-    transform: translateY(-300px) rotate(-20deg);
+    transform: translateY(-30rem) rotate(-20deg);
   }
-  100% {
+  to {
     opacity: 1;
     transform: translateY(0) rotate(0);
   }
 }
-@keyframes flamingo-move {
-  0% {
+@keyframes showFlamingo {
+  from {
     opacity: 0;
-    transform: translate(-100px, 100%) scale(0);
+    transform: translate(-10rem, 100%) scale(0);
   }
-  100% {
+  to {
     opacity: 1;
     transform: translate(0, 0) scale(1);
   }
 }
-@keyframes flamingo-rotate {
-  0% {
-    transform: translate(-3px, -6px) rotate(3deg);
+@keyframes rotateFlamingo {
+  from {
+    transform: translate(-0.3rem, -0.6rem) rotate(3deg);
   }
   50% {
-    transform: translate(3px, 6px) rotate(-3deg);
+    transform: translate(0.3rem, 0.6rem) rotate(-3deg);
   }
-  100% {
-    transform: translate(-3px, -6px) rotate(3deg);
+  to {
+    transform: translate(-0.3rem, -0.6rem) rotate(3deg);
   }
 }
-@keyframes suitcase {
-  0% {
+@keyframes showSuitcase {
+  from {
     opacity: 0;
-    transform: translate(-100px, 100%) scale(0);
+    transform: translate(-10rem, 100%) scale(0);
   }
-  100% {
+  to {
     opacity: 1;
     transform: translate(0, 0) scale(1);
   }
@@ -4568,10 +4530,8 @@ body.loaded .social-block__toggler::before {
   top: 40%;
   left: 54%;
   display: block;
-  opacity: 0;
-  transform: translate3d(0, -300px, 0);
   transform-origin: left center;
-  animation: right-leaf 1s ease 0.5s forwards;
+  animation: showRightBlueLeaf 2s ease 0.5s both;
   animation-play-state: paused;
 }
 .result--prize img.leaf-blue-2 {
@@ -4581,10 +4541,8 @@ body.loaded .social-block__toggler::before {
   top: 50%;
   right: 54%;
   display: block;
-  opacity: 0;
-  transform: translate3d(0, -300px, 0);
   transform-origin: right center;
-  animation: left-leaf 1s ease 0.5s forwards;
+  animation: showLeftBlueLeaf 2s ease 0.5s both;
   animation-play-state: paused;
 }
 .result--prize img.leaf-green {
@@ -4594,10 +4552,8 @@ body.loaded .social-block__toggler::before {
   top: 52%;
   left: 53%;
   display: block;
-  opacity: 0;
-  transform: translate3d(0, -300px, 0);
   transform-origin: left center;
-  animation: green-leaf 1s ease 0.5s forwards;
+  animation: showGreenLeaf 1s ease 0.5s both;
   animation-play-state: paused;
 }
 .result--prize img.suitcase {
@@ -4607,9 +4563,7 @@ body.loaded .social-block__toggler::before {
   top: 37%;
   left: calc(50% - 220px);
   display: block;
-  opacity: 0;
-  transform: translate(-100px, 100%) scale(0);
-  animation: suitcase 0.5s cubic-bezier(0.17, 0.67, 0.83, 1.29) 0.3s forwards;
+  animation: showSuitcase 0.5s cubic-bezier(0.17, 0.67, 0.83, 1.29) 0.3s both;
   animation-play-state: paused;
 }
 .result--prize img.flamingo {
@@ -4619,14 +4573,12 @@ body.loaded .social-block__toggler::before {
   top: 50%;
   left: calc(50% - 250px);
   display: block;
-  opacity: 0;
-  transform: translate(-100px, 100%) scale(0);
   transform-origin: center center;
-  animation-name: flamingo-move, flamingo-rotate;
+  animation-name: showFlamingo, rotateFlamingo;
   animation-duration: 0.5s, 2.5s;
   animation-timing-function: ease-out;
   animation-delay: 0.3s, 0.8s;
-  animation-fill-mode: forwards;
+  animation-fill-mode: both, forwards;
   animation-iteration-count: 1, infinite;
   animation-play-state: paused;
 }
