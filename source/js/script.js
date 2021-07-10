@@ -28,11 +28,12 @@ const fullPageScroll = new FullPageScroll();
 fullPageScroll.init();
 
 const animations = {};
-animations[`intro__title`] = animateLetters(document.querySelector(`.intro__title`), {duration: 1000, delay: 500});
-animations[`intro__date`] = animateLetters(document.querySelector(`.intro__date`), {duration: 500, delay: 1000, wordDelayDiff: 0});
-animations[`slider__item-title`] = animateLetters(document.querySelector(`.slider__item-title`), {duration: 500, delay: 500});
-animations[`rules__title`] = animateLetters(document.querySelector(`.rules__title`), {duration: 500, delay: 500});
-animations[`game__title`] = animateLetters(document.querySelector(`.game__title`), {duration: 500, delay: 500});
+animations[`intro__title`] = animateLetters(document.querySelector(`.intro__title`), {duration: 600, delay: 200});
+animations[`intro__date`] = animateLetters(document.querySelector(`.intro__date`), {duration: 400, delay: 700});
+animations[`slider__item-title`] = animateLetters(document.querySelector(`.slider__item-title`), {duration: 250, delay: 0, waveLength: 0});
+animations[`rules__title`] = animateLetters(document.querySelector(`.rules__title`), {duration: 250, delay: 0});
+animations[`game__title`] = animateLetters(document.querySelector(`.game__title`), {duration: 250, delay: 0});
+animations[`prizes__title`] = animateLetters(document.querySelector(`.prizes__title`), {duration: 250, delay: 250});
 
 const replayAnimations = () => {
   for (const key of Object.keys(animations)) {

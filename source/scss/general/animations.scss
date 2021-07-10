@@ -156,7 +156,7 @@
 }
 
 .screen:not(.active) {
-  .form__field {
+  .chat__footer .form__field {
     width: 0;
     padding: 0;
   }
@@ -265,17 +265,16 @@ body.loaded {
     .rules__list {
       .rules__item {
         &::before {
-          animation: show-bullet 0.3s forwards;
+          animation: showBullet 0.3s both;
           animation-timing-function: cubic-bezier(0.17, 0.67, 0.75, 1.47);
         }
 
         &::after {
-          animation: show-digits 0.3s forwards;
+          animation: fadeIn 0.3s both;
         }
 
         p {
-          transform: translateX(30px);
-          animation: show-text 0.5s ease-out forwards;
+          animation: showText 0.5s ease-out both;
         }
 
         &:nth-of-type(1) {
@@ -337,42 +336,41 @@ body.loaded {
     }
 
     .rules__link {
-      animation: show-link-text 0.3s forwards 1.7s;
+      animation: showLinkText 0.3s both 1.7s;
 
       &::before {
-        animation: show-link 0.3s forwards 1.4s;
+        animation: showLink 0.3s both 1.4s;
       }
     }
   }
 }
 
 
-@keyframes show-bullet {
+@keyframes showBullet {
+  from {
+    transform: scale(0, 0);
+  }
+
   to {
     transform: scale(1, 1);
   }
 }
 
-@keyframes show-digits {
+@keyframes showText {
   from {
+    transform: translateX(3rem);
     opacity: 0;
   }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes show-text {
   to {
     transform: translateX(0);
     opacity: 1;
   }
 }
 
-@keyframes show-link {
-  0% {
-    opacity: 1;
+@keyframes showLink {
+  from {
+    opacity: 0;
+    width: 6rem;
   }
 
   to {
@@ -382,16 +380,19 @@ body.loaded {
   }
 }
 
-@keyframes show-link-text {
+@keyframes showLinkText {
+  from {
+    color: transparent;
+  }
   to {
     color: $c-dark;
   }
 }
 
-@keyframes right-leaf {
-  0% {
+@keyframes showRightBlueLeaf {
+  from {
     opacity: 0;
-    transform: translateY(-300px) rotateZ(-20deg);
+    transform: translateY(-30rem) rotateZ(-20deg);
   }
 
   25% {
@@ -407,16 +408,16 @@ body.loaded {
     opacity: 1;
   }
 
-  100% {
+  to {
     opacity: 1;
     transform: translateY(0) rotateZ(0);
   }
 }
 
-@keyframes left-leaf {
-  0% {
+@keyframes showLeftBlueLeaf {
+  from {
     opacity: 0;
-    transform: translateY(-300px) rotate(20deg);
+    transform: translateY(-30rem) rotate(20deg);
   }
 
   25% {
@@ -432,57 +433,57 @@ body.loaded {
     opacity: 1;
   }
 
-  100% {
+  to {
     opacity: 1;
     transform: translateY(0) rotate(0);
   }
 }
 
-@keyframes green-leaf {
-  0% {
+@keyframes showGreenLeaf {
+  from {
     opacity: 0;
-    transform: translateY(-300px) rotate(-20deg);
+    transform: translateY(-30rem) rotate(-20deg);
   }
 
-  100% {
+  to {
     opacity: 1;
     transform: translateY(0) rotate(0);
   }
 }
 
-@keyframes flamingo-move {
-  0% {
+@keyframes showFlamingo {
+  from {
     opacity: 0;
-    transform: translate(-100px, 100%) scale(0);
+    transform: translate(-10rem, 100%) scale(0);
   }
 
-  100% {
+  to {
     opacity: 1;
     transform: translate(0, 0) scale(1);
   }
 }
 
-@keyframes flamingo-rotate {
-  0% {
-    transform: translate(-3px, -6px) rotate(3deg);
+@keyframes rotateFlamingo {
+  from {
+    transform: translate(-0.3rem, -0.6rem) rotate(3deg);
   }
 
   50% {
-    transform: translate(3px, 6px) rotate(-3deg);
+    transform: translate(0.3rem, 0.6rem) rotate(-3deg);
   }
 
-  100% {
-    transform: translate(-3px, -6px) rotate(3deg);
+  to {
+    transform: translate(-0.3rem, -0.6rem) rotate(3deg);
   }
 }
 
-@keyframes suitcase {
-  0% {
+@keyframes showSuitcase {
+  from {
     opacity: 0;
-    transform: translate(-100px, 100%) scale(0);
+    transform: translate(-10rem, 100%) scale(0);
   }
 
-  100% {
+  to {
     opacity: 1;
     transform: translate(0, 0) scale(1);
   }
@@ -500,10 +501,8 @@ body.loaded {
       top: 40%;
       left: 54%;
       display: block;
-      opacity: 0;
-      transform: translate3d(0, -300px, 0);
       transform-origin: left center;
-      animation: right-leaf 1s ease 0.5s forwards;
+      animation: showRightBlueLeaf 2s ease 0.5s both;
       animation-play-state: paused;
     }
 
@@ -514,10 +513,8 @@ body.loaded {
       top: 50%;
       right: 54%;
       display: block;
-      opacity: 0;
-      transform: translate3d(0, -300px, 0);
       transform-origin: right center;
-      animation: left-leaf 1s ease 0.5s forwards;
+      animation: showLeftBlueLeaf 2s ease 0.5s both;
       animation-play-state: paused;
     }
 
@@ -528,10 +525,8 @@ body.loaded {
       top: 52%;
       left: 53%;
       display: block;
-      opacity: 0;
-      transform: translate3d(0, -300px, 0);
       transform-origin: left center;
-      animation: green-leaf 1s ease 0.5s forwards;
+      animation: showGreenLeaf 1s ease 0.5s both;
       animation-play-state: paused;
     }
 
@@ -542,9 +537,7 @@ body.loaded {
       top: 37%;
       left: calc(50% - 220px);
       display: block;
-      opacity: 0;
-      transform: translate(-100px, 100%) scale(0);
-      animation: suitcase 0.5s cubic-bezier(0.17, 0.67, 0.83, 1.29) 0.3s forwards;
+      animation: showSuitcase 0.5s cubic-bezier(0.17, 0.67, 0.83, 1.29) 0.3s both;
       animation-play-state: paused;
     }
 
@@ -555,14 +548,12 @@ body.loaded {
       top: 50%;
       left: calc(50% - 250px);
       display: block;
-      opacity: 0;
-      transform: translate(-100px, 100%) scale(0);
       transform-origin: center center;
-      animation-name: flamingo-move, flamingo-rotate;
+      animation-name: showFlamingo, rotateFlamingo;
       animation-duration: 0.5s, 2.5s;
       animation-timing-function: ease-out;
       animation-delay: 0.3s, 0.8s;
-      animation-fill-mode: forwards;
+      animation-fill-mode: both, forwards;
       animation-iteration-count: 1, infinite;
       animation-play-state: paused;
     }

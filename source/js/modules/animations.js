@@ -5,30 +5,38 @@ export const animateLetters = (textNode, settings) => {
     return [];
   }
 
-  const duration = settings.duration ? settings.duration : 500;
+  const duration = settings.duration ? settings.duration : 800;
   const delay = settings.delay ? settings.delay : 0;
-  const wordDelayDiff = settings.hasOwnProperty(`wordDelayDiff`) ? settings.wordDelayDiff : 300;
+  const waveLength = settings.waveLength ? settings.waveLength : 6;
 
   prepareLetters(textNode);
 
   const words = textNode.querySelectorAll(`.animated-text__word`);
-  let wordDelay = 0;
+  let wordIndex = 0;
+  let letterIndex = 0;
   for (const word of words) {
     const letters = word.querySelectorAll(`span`);
     for (const letter of letters) {
+      const letterDuration = (duration * 1.5) / (wordIndex + 1);
+      const letterDelay = (Math.abs((letterIndex % waveLength) - waveLength / 2)
+        * (Math.trunc(Math.random() * 75 / (wordIndex + 1)) + 75))
+        + (duration / (wordIndex + 1) * wordIndex * 1.5)
+        + delay;
       const animation = letter.animate([
         // keyframes
+        {transform: `translate3d(0, 100%, 0)`},
         {transform: `translate3d(0, 0, 0)`}
       ], {
         // timing options
-        duration,
-        fill: `forwards`,
-        delay: Math.random() * 300 + wordDelay + delay
+        duration: letterDuration,
+        fill: `both`,
+        delay: letterDelay,
+        easing: `cubic-bezier(0.18, 0.89, 0.32, 1)`
       });
-      animationsArray.push(animation)
+      animationsArray.push(animation);
+      letterIndex++;
     }
-
-    wordDelay += wordDelayDiff;
+    wordIndex++;
   }
   return animationsArray;
 };

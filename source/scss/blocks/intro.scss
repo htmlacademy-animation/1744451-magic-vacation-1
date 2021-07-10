@@ -169,12 +169,8 @@
   overflow: hidden;
 
   & > span {
-    transform: translate3d(0, 100%, 0);
     display: inline-block;
     padding-top: 2rem;
-
-    .active .active > & {
-      transform: translate3d(0, 0, 0);
-    }
+    will-change: transform;
   }
 }
