@@ -14,6 +14,16 @@ document.addEventListener(`DOMContentLoaded`, () => {
   document.body.classList.add(`loaded`);
 });
 
+window.addEventListener(`changeTheme`, (event) => {
+  for (let i = 0; i < 8; i++) {
+    document.body.classList.remove(`theme-${i}`);
+  }
+
+  if (event.detail.isStoryPage) {
+    document.body.classList.add(`theme-${event.detail.index}`);
+  }
+});
+
 // init modules
 mobileHeight();
 slider();
@@ -44,3 +54,4 @@ const replayAnimations = () => {
 };
 
 document.body.addEventListener(`screenChanged`, replayAnimations);
+

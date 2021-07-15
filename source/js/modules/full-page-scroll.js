@@ -37,6 +37,7 @@ export default class FullPageScroll {
     this.changeVisibilityDisplay();
     this.changeActiveMenuItem();
     this.emitChangeDisplayEvent();
+    this.emitChangeThemeEvent();
   }
 
   changeVisibilityDisplay() {
@@ -70,6 +71,16 @@ export default class FullPageScroll {
       this.menuElements.forEach((item) => item.classList.remove(`active`));
       activeItem.classList.add(`active`);
     }
+  }
+
+  emitChangeThemeEvent() {
+    const changeThemeEvent = new CustomEvent(`changeTheme`, {
+      detail: {
+        'isStoryPage': this.screenElements[this.activeScreen].id === `story`,
+        'index': 0
+      }
+    });
+    window.dispatchEvent(changeThemeEvent);
   }
 
   emitChangeDisplayEvent() {

@@ -65,7 +65,7 @@
   }
 
   &:hover {
-    color: $c-dark;
+    color: var(--theme-color-secondary);
 
     &::before {
       transform: translate(-50%, -50%) scale(1.125);
@@ -79,8 +79,8 @@
     color: $c-light;
 
     &::before {
-      background-color: $c-purple;
-      border-color: $c-purple;
+      background-color: var(--theme-color-primary);
+      border-color: var(--theme-color-primary);
       transform: translate(-50%, -50%) scale(1);
 
       width: 100%;
@@ -88,7 +88,7 @@
     }
 
     &:hover {
-      color: $c-purple;
+      color: var(--theme-color-secondary);
 
       &::before {
         transform: translate(-50%, -50%) scale(1.125);
@@ -562,4 +562,38 @@ body.loaded {
 
 #result2.screen--show img {
   animation-play-state: running;
+}
+
+
+@keyframes rollInFromRight {
+  from {
+    transform: translateX(5rem) rotate(90deg);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0) rotate(0);
+    opacity: 1;
+  }
+}
+
+@keyframes rollInFromleft {
+  from {
+    transform: translateX(-5rem) rotate(-90deg);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0) rotate(0);
+    opacity: 1;
+  }
+}
+
+.active {
+  .slider__control--prev {
+    animation: rollInFromleft 0.5s 1s both;
+  }
+  .slider__control--next {
+    animation: rollInFromRight 0.5s 1s both;
+  }
 }
