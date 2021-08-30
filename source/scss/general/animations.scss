@@ -235,27 +235,22 @@ body.loaded {
   }
 }
 
-//.screen--story.screen--hidden {
-//  height: auto;
-//  min-height: initial;
-//  visibility: visible;
-//  z-index: 2;
-//}
-
-//.screen--story.active ~ .overlay {
-//  transform: scaleY(0);
-//}
-
-.screen--prizes.screen--next ~ .overlay {
+.screen--prizes.screen--next .overlay {
   transform: scaleY(1);
 }
+
+// .screen--prizes.screen--next .screen__footer {
+//   z-index: 1000;
+//   transform: none;
+// }
+
 
 .screen--prizes.active {
   z-index: 2;
 
   transition: opacity 0.5s ease;
 
-  & ~ .overlay {
+  .overlay {
     transition-duration: 0s;
   }
 }
@@ -361,6 +356,7 @@ body.loaded {
     transform: translateX(3rem);
     opacity: 0;
   }
+
   to {
     transform: translateX(0);
     opacity: 1;
@@ -384,6 +380,7 @@ body.loaded {
   from {
     color: transparent;
   }
+
   to {
     color: $c-dark;
   }
@@ -593,7 +590,67 @@ body.loaded {
   .slider__control--prev {
     animation: rollInFromleft 0.5s 1s both;
   }
+
   .slider__control--next {
     animation: rollInFromRight 0.5s 1s both;
+  }
+}
+
+.result--negative {
+  .result__button {
+    .result__button--image {
+      animation: rollInFromRight 0.5s 1s both;
+      animation-play-state: paused;
+    }
+
+    .result__button--text {
+      animation: fadeIn 0.5s 0.5s both;
+      animation-play-state: paused;
+    }
+  }
+}
+
+.screen--show .result--negative {
+  .result__button {
+    span {
+      animation-play-state: running;
+    }
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+.screen--prizes.active {
+  &:not(.screen--next) {
+    .screen__footer-note {
+      animation: fadeOut 0.5s both;
+    }
+  }
+}
+
+.screen--rules.screen--next {
+  &:not(.active) {
+    .disclaimer {
+      animation: fadeIn 0.5s both;
+    }
   }
 }
