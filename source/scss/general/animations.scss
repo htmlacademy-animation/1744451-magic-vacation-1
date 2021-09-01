@@ -235,7 +235,7 @@ body.loaded {
   }
 }
 
-.screen--prizes.screen--next .overlay {
+.screen--story.screen--leaving .overlay {
   transform: scaleY(1);
 }
 
@@ -246,9 +246,9 @@ body.loaded {
 
 
 .screen--prizes.active {
-  z-index: 2;
+  //z-index: 2;
 
-  transition: opacity 0.5s ease;
+  //transition: opacity 0.5s ease;
 
   .overlay {
     transition-duration: 0s;
