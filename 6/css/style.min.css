@@ -4673,4 +4673,16 @@ body.loaded .social-block__toggler::before {
   animation: fadeIn 0.5s both;
 }
 
+.screen--prizes .screen__footer {
+  transition-property: width, height, color;
+  transition-duration: 0.5s;
+  transition-delay: 0.5s, 0.5s, 0s;
+  transition-timing-function: ease;
+  color: transparent;
+}
+.screen--prizes .screen__footer--full {
+  transition-delay: 0s, 0s, 0.5s;
+  color: #5f458c;
+}
+
 /*# sourceMappingURL=style.min.css.map*/
