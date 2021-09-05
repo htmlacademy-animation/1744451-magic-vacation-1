@@ -654,3 +654,20 @@ body.loaded {
     }
   }
 }
+
+.screen--rules.active {
+  &:not(.screen--next) {
+    .disclaimer ul {
+      animation: fadeOut 0.5s both;
+    }
+  }
+}
+
+.screen--prizes.screen--next {
+  &:not(.active) {
+    .screen__footer-note {
+      animation: fadeIn 0.5s both;
+    }
+  }
+}
+

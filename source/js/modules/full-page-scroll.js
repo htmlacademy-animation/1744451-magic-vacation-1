@@ -44,7 +44,7 @@ export default class FullPageScroll {
   changeVisibilityDisplay() {
     let timeout = 0;
 
-    if (this.lastActiveScreen === 1 && this.activeScreen === 2) {
+    if ((this.activeScreen === 2 || this.activeScreen === 3) && this.lastActiveScreen !== 0) {
       timeout = 1000;
     }
 
