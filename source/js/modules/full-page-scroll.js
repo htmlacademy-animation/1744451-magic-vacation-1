@@ -8,6 +8,7 @@ export default class FullPageScroll {
     this.menuElements = document.querySelectorAll(`.page-header__menu .js-menu-link`);
 
     this.activeScreen = 0;
+    this.lastActiveScreen = 0;
     this.onScrollHandler = this.onScroll.bind(this);
     this.onUrlHashChengedHandler = this.onUrlHashChanged.bind(this);
   }
@@ -29,6 +30,7 @@ export default class FullPageScroll {
 
   onUrlHashChanged() {
     const newIndex = Array.from(this.screenElements).findIndex((screen) => location.hash.slice(1) === screen.id);
+    this.lastActiveScreen = this.activeScreen;
     this.activeScreen = (newIndex < 0) ? 0 : newIndex;
     this.changePageDisplay();
   }
@@ -36,32 +38,35 @@ export default class FullPageScroll {
   changePageDisplay() {
     this.changeVisibilityDisplay();
     this.changeActiveMenuItem();
-    this.emitChangeDisplayEvent();
+    this.emitChangeThemeEvent();
   }
 
   changeVisibilityDisplay() {
     let timeout = 0;
 
+    if ((this.activeScreen === 2 || this.activeScreen === 3) && this.lastActiveScreen !== 0) {
+      timeout = 1000;
+    }
+
     this.screenElements.forEach((screen) => {
-      if (screen.classList.contains(`screen--story`) && screen.classList.contains(`active`) && this.screenElements[this.activeScreen].classList.contains(`screen--prizes`)) {
-        timeout = 500;
-      }
       screen.classList.remove(`screen--next`);
+      if (screen.classList.contains(`active`)) {
+        screen.classList.add(`screen--leaving`);
+      }
 
       setTimeout(() => {
         screen.classList.add(`screen--hidden`);
         screen.classList.remove(`active`);
+        screen.classList.remove(`screen--leaving`);
       }, timeout);
-      // screen.classList.add(`screen--hidden`);
-      // screen.classList.remove(`active`);
 
     });
     setTimeout(() => {
       this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
       this.screenElements[this.activeScreen].classList.add(`active`);
+      this.emitChangeDisplayEvent();
     }, timeout);
     this.screenElements[this.activeScreen].classList.add(`screen--next`);
-
   }
 
   changeActiveMenuItem() {
@@ -70,6 +75,16 @@ export default class FullPageScroll {
       this.menuElements.forEach((item) => item.classList.remove(`active`));
       activeItem.classList.add(`active`);
     }
+  }
+
+  emitChangeThemeEvent() {
+    const changeThemeEvent = new CustomEvent(`changeTheme`, {
+      detail: {
+        'isStoryPage': this.screenElements[this.activeScreen].id === `story`,
+        'index': 0
+      }
+    });
+    window.dispatchEvent(changeThemeEvent);
   }
 
   emitChangeDisplayEvent() {

@@ -1,0 +1,28 @@
+body {
+  --theme-color-primary: #{$c-purple};
+  --theme-color-secondary: #{$c-dark};
+
+  &.theme-0,
+ &.theme-1 {
+    --theme-color-primary: #{$c-dark};
+    --theme-color-secondary: #{$c-purple};
+  }
+
+  &.theme-2,
+ &.theme-3 {
+    --theme-color-primary: #{$c-blue-light};
+    --theme-color-secondary: #{$c-blue-dark};
+  }
+
+  &.theme-4,
+ &.theme-5 {
+    --theme-color-primary: #{$c-blue-light};
+    --theme-color-secondary: #{$c-blue-dark};
+  }
+
+  &.theme-6,
+ &.theme-7 {
+    --theme-color-primary: #{$c-blue-light};
+    --theme-color-secondary: #{$c-blue-dark};
+  }
+}

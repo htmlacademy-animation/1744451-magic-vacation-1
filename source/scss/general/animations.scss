@@ -65,7 +65,7 @@
   }
 
   &:hover {
-    color: $c-dark;
+    color: var(--theme-color-secondary);
 
     &::before {
       transform: translate(-50%, -50%) scale(1.125);
@@ -79,8 +79,8 @@
     color: $c-light;
 
     &::before {
-      background-color: $c-purple;
-      border-color: $c-purple;
+      background-color: var(--theme-color-primary);
+      border-color: var(--theme-color-primary);
       transform: translate(-50%, -50%) scale(1);
 
       width: 100%;
@@ -88,7 +88,7 @@
     }
 
     &:hover {
-      color: $c-purple;
+      color: var(--theme-color-secondary);
 
       &::before {
         transform: translate(-50%, -50%) scale(1.125);
@@ -235,27 +235,22 @@ body.loaded {
   }
 }
 
-//.screen--story.screen--hidden {
-//  height: auto;
-//  min-height: initial;
-//  visibility: visible;
-//  z-index: 2;
-//}
-
-//.screen--story.active ~ .overlay {
-//  transform: scaleY(0);
-//}
-
-.screen--prizes.screen--next ~ .overlay {
+.screen--story.screen--leaving .overlay {
   transform: scaleY(1);
 }
 
+// .screen--prizes.screen--next .screen__footer {
+//   z-index: 1000;
+//   transform: none;
+// }
+
+
 .screen--prizes.active {
-  z-index: 2;
+  //z-index: 2;
 
-  transition: opacity 0.5s ease;
+  //transition: opacity 0.5s ease;
 
-  & ~ .overlay {
+  .overlay {
     transition-duration: 0s;
   }
 }
@@ -361,6 +356,7 @@ body.loaded {
     transform: translateX(3rem);
     opacity: 0;
   }
+
   to {
     transform: translateX(0);
     opacity: 1;
@@ -384,6 +380,7 @@ body.loaded {
   from {
     color: transparent;
   }
+
   to {
     color: $c-dark;
   }
@@ -562,4 +559,130 @@ body.loaded {
 
 #result2.screen--show img {
   animation-play-state: running;
+}
+
+
+@keyframes rollInFromRight {
+  from {
+    transform: translateX(5rem) rotate(90deg);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0) rotate(0);
+    opacity: 1;
+  }
+}
+
+@keyframes rollInFromleft {
+  from {
+    transform: translateX(-5rem) rotate(-90deg);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0) rotate(0);
+    opacity: 1;
+  }
+}
+
+.active {
+  .slider__control--prev {
+    animation: rollInFromleft 0.5s 1s both;
+  }
+
+  .slider__control--next {
+    animation: rollInFromRight 0.5s 1s both;
+  }
+}
+
+.result--negative {
+  .result__button {
+    .result__button--image {
+      animation: rollInFromRight 0.5s 1s both;
+      animation-play-state: paused;
+    }
+
+    .result__button--text {
+      animation: fadeIn 0.5s 0.5s both;
+      animation-play-state: paused;
+    }
+  }
+}
+
+.screen--show .result--negative {
+  .result__button {
+    span {
+      animation-play-state: running;
+    }
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+.screen--prizes.active {
+  &:not(.screen--next) {
+    .screen__footer-note {
+      animation: fadeOut 0.5s both;
+    }
+  }
+}
+
+.screen--rules.screen--next {
+  &:not(.active) {
+    .disclaimer {
+      animation: fadeIn 0.5s both;
+    }
+  }
+}
+
+.screen--rules.active {
+  &:not(.screen--next) {
+    .disclaimer ul {
+      animation: fadeOut 0.5s both;
+    }
+  }
+}
+
+.screen--prizes.screen--next {
+  &:not(.active) {
+    .screen__footer-note {
+      animation: fadeIn 0.5s both;
+    }
+  }
+}
+
+@media (max-width: 1024px) and (orientation: portrait) {
+  .screen--prizes {
+    .screen__footer {
+      transition-property: width, height, color;
+      transition-duration: 0.5s;
+      transition-delay: 0.5s, 0.5s, 0s;
+      transition-timing-function: ease;
+      color: transparent;
+      &--full {
+        transition-delay: 0s, 0s, 0.5s;
+        color: $c-dark;
+      }
+    }
+  }
 }
