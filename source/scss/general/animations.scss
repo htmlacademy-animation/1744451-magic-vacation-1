@@ -671,3 +671,19 @@ body.loaded {
   }
 }
 
+.screen--prizes {
+  .screen__footer {
+    transition-property: width, height, color;
+    transition-duration: 0.5s;
+    transition-delay: 0.5s, 0.5s, 0s;
+    transition-timing-function: ease;
+    color: transparent;
+    &--full {
+      transition-delay: 0s, 0s, 0.5s;
+      color: $c-dark;
+    }
+  }
+
+
+}
+
