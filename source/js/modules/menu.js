@@ -28,7 +28,7 @@ export default () => {
       }
 
       updatePrizeSrc(`.prizes__item--journeys`, `img/module-3/img/primary-award.svg`);
-      updatePrizeSrc(`.prizes__item--cases`, `img/second-award.svg`);
+      updatePrizeSrc(`.prizes__item--cases`, `img/module-3/img/second-award.svg`);
     });
   }
 };
