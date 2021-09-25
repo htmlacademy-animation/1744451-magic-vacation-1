@@ -1,4 +1,5 @@
 import throttle from 'lodash/throttle';
+import { startPrizesAnimation } from './animations.js';
 
 export default class FullPageScroll {
   constructor() {
@@ -65,6 +66,7 @@ export default class FullPageScroll {
       this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
       this.screenElements[this.activeScreen].classList.add(`active`);
       this.emitChangeDisplayEvent();
+      startPrizesAnimation();
     }, timeout);
     this.screenElements[this.activeScreen].classList.add(`screen--next`);
   }
