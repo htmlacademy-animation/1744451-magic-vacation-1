@@ -21,6 +21,9 @@ export default () => {
         header.classList.remove(`page-header--menu-opened`);
         document.body.classList.remove(`menu-opened`);
       }
+
+      const firstPrize = document.querySelector(`.prizes__item--journeys`);
+      firstPrize.querySelector(`img`).setAttribute(`src`, `img/module-3/img/primary-award.svg`);
     });
   }
 };
