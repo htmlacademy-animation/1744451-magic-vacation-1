@@ -60,3 +60,13 @@ const prepareLetters = (textNode) => {
     }
   }
 };
+
+const primaryAward = document.getElementById(`primary-award`);
+const secondaryAward = document.getElementById(`secondary-award`);
+const additionalAward = document.getElementById(`additional-award`);
+
+export const startPrizesAnimation = () => {
+  primaryAward.src = `img/primary-award.svg?${new Date().getTime()}`;
+  secondaryAward.src = `img/second-award.svg?${new Date().getTime()}`;
+  additionalAward.src = `img/additional-award.svg?${new Date().getTime()}`;
+};

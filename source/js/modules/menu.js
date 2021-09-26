@@ -1,8 +1,3 @@
-const updatePrizeSrc = (selector, imagePath) => {
-  const prizeEl = document.querySelector(selector);
-  prizeEl.querySelector(`img`).setAttribute(`src`, imagePath);
-};
-
 export default () => {
   let header = document.querySelector(`.js-header`);
   let menuToggler = document.querySelector(`.js-menu-toggler`);
@@ -26,9 +21,6 @@ export default () => {
         header.classList.remove(`page-header--menu-opened`);
         document.body.classList.remove(`menu-opened`);
       }
-
-      updatePrizeSrc(`.prizes__item--journeys`, `img/module-3/img/primary-award.svg`);
-      updatePrizeSrc(`.prizes__item--cases`, `img/module-3/img/second-award.svg`);
     });
   }
 };
