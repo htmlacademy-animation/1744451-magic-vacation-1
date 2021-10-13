@@ -62,11 +62,11 @@ export default class FullPageScroll {
       }, timeout);
 
     });
-    setTimeout(() => {
+    setTimeout(async () => {
       this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
       this.screenElements[this.activeScreen].classList.add(`active`);
       this.emitChangeDisplayEvent();
-      startPrizesAnimation();
+      await startPrizesAnimation();
     }, timeout);
     this.screenElements[this.activeScreen].classList.add(`screen--next`);
   }
