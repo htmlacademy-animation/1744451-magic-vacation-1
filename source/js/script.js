@@ -9,6 +9,8 @@ import form from './modules/form.js';
 import social from './modules/social.js';
 import {animateLetters} from './modules/animations.js';
 import FullPageScroll from './modules/full-page-scroll';
+import GameTimer from './modules/game-timer';
+
 
 document.addEventListener(`DOMContentLoaded`, () => {
   document.body.classList.add(`loaded`);
@@ -34,6 +36,7 @@ result();
 form();
 social();
 
+const timer = new GameTimer();
 const fullPageScroll = new FullPageScroll();
 fullPageScroll.init();
 
@@ -53,5 +56,17 @@ const replayAnimations = () => {
   }
 };
 
-document.body.addEventListener(`screenChanged`, replayAnimations);
+document.body.addEventListener(`screenChanged`, (event) => {
+  if (timer.requestId) {
+    timer.destroy();
+  }
+  switch (event.detail.screenName) {
+    case `game`:
+      timer.init();
+      break;
+    default:
+      break;
+  }
+  replayAnimations()
+});
 
